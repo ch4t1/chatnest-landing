@@ -281,6 +281,22 @@
       color: #fff;
     }
     .plan-btn.pro:hover { background: var(--purple-dark); }
+    .plan-btn.pro-yearly {
+      display: block;
+      text-align: center;
+      padding: 0.65rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: transparent;
+      border: 1px solid var(--purple-light);
+      color: var(--purple-light);
+      margin-top: 0.6rem;
+      transition: background 0.2s;
+      cursor: pointer;
+      width: 100%;
+    }
+    .plan-btn.pro-yearly:hover { background: rgba(124,58,237,0.15); }
 
     /* FAQ */
     .faq-list { max-width: 680px; margin: 0 auto; }
@@ -419,7 +435,8 @@
           <li class="pro-feature"><span class="check">✓</span> All 7 platforms</li>
           <li class="pro-feature"><span class="check">✓</span> Priority support</li>
         </ul>
-        <a href="#" class="plan-btn pro" id="pro-btn">Upgrade to Pro →</a>
+        <button onclick="openCheckout('monthly')" class="plan-btn pro">Upgrade Monthly — $3.99</button>
+        <button onclick="openCheckout('yearly')" class="plan-btn pro-yearly">Yearly — $19.99 (save 58%)</button>
       </div>
     </div>
   </div>
@@ -458,5 +475,18 @@
   <p>© 2026 ChatNest · <a href="https://www.notion.so/YOUR_PRIVACY_POLICY" target="_blank">Privacy Policy</a> · Built for AI power users</p>
 </footer>
 
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+  Paddle.Initialize({ token: 'live_8537f810721a7bb1dc8267e862e' });
+
+  function openCheckout(plan) {
+    const priceId = plan === 'yearly'
+      ? 'pri_01km8gh2p0zbshfbdk6emcv3rv'
+      : 'pri_01km8g1xze19qrnz8yjd3fvygs';
+    Paddle.Checkout.open({
+      items: [{ priceId: priceId, quantity: 1 }]
+    });
+  }
+</script>
 </body>
 </html>
